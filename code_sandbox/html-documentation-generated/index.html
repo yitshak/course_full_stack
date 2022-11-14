@@ -1,0 +1,2463 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Backend API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Backend API</h1>
+    <div class="app-desc">This is the API to communicate from the device to the backend.</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.1.0</div>
+    <div class="app-desc">BasePath:/</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Api">Api</a></h4>
+  <ul>
+  <li><a href="#apiAuthPost"><code><span class="http-method">post</span> /api/auth</code></a></li>
+  <li><a href="#apiV0AccidentAccidentIdGet"><code><span class="http-method">get</span> /api/v0/accident/{accidentId}</code></a></li>
+  <li><a href="#apiV0AccidentAccidentIdPost"><code><span class="http-method">post</span> /api/v0/accident/{accidentId}</code></a></li>
+  <li><a href="#apiV0AccidentGet"><code><span class="http-method">get</span> /api/v0/accident</code></a></li>
+  <li><a href="#apiV0ConfigGet"><code><span class="http-method">get</span> /api/v0/config</code></a></li>
+  <li><a href="#apiV0ConfigPost"><code><span class="http-method">post</span> /api/v0/config</code></a></li>
+  <li><a href="#apiV0DeviceGet"><code><span class="http-method">get</span> /api/v0/device</code></a></li>
+  <li><a href="#apiV0EventEventIdGet"><code><span class="http-method">get</span> /api/v0/event/{eventId}</code></a></li>
+  <li><a href="#apiV0EventGet"><code><span class="http-method">get</span> /api/v0/event</code></a></li>
+  <li><a href="#apiV0MetricGet"><code><span class="http-method">get</span> /api/v0/metric</code></a></li>
+  <li><a href="#apiV0TripGet"><code><span class="http-method">get</span> /api/v0/trip</code></a></li>
+  <li><a href="#apiV0UpdateDelete"><code><span class="http-method">delete</span> /api/v0/update</code></a></li>
+  <li><a href="#apiV0UpdatePost"><code><span class="http-method">post</span> /api/v0/update</code></a></li>
+  <li><a href="#apiV0UpdatePut"><code><span class="http-method">put</span> /api/v0/update</code></a></li>
+  <li><a href="#apiV0UserGet"><code><span class="http-method">get</span> /api/v0/user</code></a></li>
+  <li><a href="#apiV1DeviceGet"><code><span class="http-method">get</span> /api/v1/device</code></a></li>
+  <li><a href="#apiV1MetricGet"><code><span class="http-method">get</span> /api/v1/metric</code></a></li>
+  </ul>
+  <h4><a href="#Gateway">Gateway</a></h4>
+  <ul>
+  <li><a href="#deviceIdCommandPost"><code><span class="http-method">post</span> /{deviceId}/command</code></a></li>
+  <li><a href="#deviceIdConfigGet"><code><span class="http-method">get</span> /{deviceId}/config</code></a></li>
+  <li><a href="#deviceIdEventEventIdPatch"><code><span class="http-method">patch</span> /{deviceId}/event/{eventId}</code></a></li>
+  <li><a href="#deviceIdEventEventIdPost"><code><span class="http-method">post</span> /{deviceId}/event/{eventId}</code></a></li>
+  <li><a href="#deviceIdEventEventIdPut"><code><span class="http-method">put</span> /{deviceId}/event/{eventId}</code></a></li>
+  <li><a href="#deviceIdEventPost"><code><span class="http-method">post</span> /{deviceId}/event</code></a></li>
+  <li><a href="#deviceIdUpdateGet"><code><span class="http-method">get</span> /{deviceId}/update</code></a></li>
+  <li><a href="#deviceIdUpdatePackageIdGet"><code><span class="http-method">get</span> /{deviceId}/update/{packageId}</code></a></li>
+  <li><a href="#deviceIdV1DeviceStatusPost"><code><span class="http-method">post</span> /{deviceId}/v1/device_status</code></a></li>
+  <li><a href="#deviceIdV1HeartbeatPost"><code><span class="http-method">post</span> /{deviceId}/v1/heartbeat</code></a></li>
+  </ul>
+
+  <h1><a name="Api">Api</a></h1>
+  <div class="method"><a name="apiAuthPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/auth</code></pre></div>
+    <div class="method-summary">Get token from server (<span class="nickname">apiAuthPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Credentials">Credentials</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "token" : "token"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#inline_response_200">inline_response_200</a>
+    <h4 class="field-label">400</h4>
+    Wrong credentials
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0AccidentAccidentIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/accident/{accidentId}</code></pre></div>
+    <div class="method-summary">Get specific accident data (<span class="nickname">apiV0AccidentAccidentIdGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">accidentId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Get results before last accident </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AccidentData">AccidentData</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "accident_id" : 0.8008281904610115,
+  "garage" : "garage",
+  "description" : "description",
+  "third_party_damage" : true,
+  "own_damage" : true,
+  "driver_name" : "driver_name",
+  "claim_number" : "claim_number",
+  "datetime" : 1.4658129805029452,
+  "event_id" : 6.027456183070403,
+  "license_plate" : "license_plate",
+  "policy_number" : "policy_number",
+  "paid_currency" : "paid_currency",
+  "paid_amount" : "paid_amount",
+  "location" : "location",
+  "appraiser" : "appraiser",
+  "customer" : "customer",
+  "status" : "status",
+  "is_closed" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Accident details
+        <a href="#AccidentData">AccidentData</a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0AccidentAccidentIdPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/v0/accident/{accidentId}</code></pre></div>
+    <div class="method-summary">Change specific accident data (<span class="nickname">apiV0AccidentAccidentIdPost</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">accidentId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Get results before last accident </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AccidentData">AccidentData</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AccidentData">AccidentData</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "accident_id" : 0.8008281904610115,
+  "garage" : "garage",
+  "description" : "description",
+  "third_party_damage" : true,
+  "own_damage" : true,
+  "driver_name" : "driver_name",
+  "claim_number" : "claim_number",
+  "datetime" : 1.4658129805029452,
+  "event_id" : 6.027456183070403,
+  "license_plate" : "license_plate",
+  "policy_number" : "policy_number",
+  "paid_currency" : "paid_currency",
+  "paid_amount" : "paid_amount",
+  "location" : "location",
+  "appraiser" : "appraiser",
+  "customer" : "customer",
+  "status" : "status",
+  "is_closed" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Accident details
+        <a href="#AccidentData">AccidentData</a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0AccidentGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/accident</code></pre></div>
+    <div class="method-summary">Get accident list (<span class="nickname">apiV0AccidentGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">last_accident (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Get results before last accident </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#AccidentDataShort">AccidentDataShort</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "driver_name" : "driver_name",
+  "claim_number" : "claim_number",
+  "datetime" : 6.027456183070403,
+  "license_plate" : "license_plate",
+  "accident_id" : 0.8008281904610115,
+  "status" : "status",
+  "own_damage" : true,
+  "is_closed" : true
+}, {
+  "driver_name" : "driver_name",
+  "claim_number" : "claim_number",
+  "datetime" : 6.027456183070403,
+  "license_plate" : "license_plate",
+  "accident_id" : 0.8008281904610115,
+  "status" : "status",
+  "own_damage" : true,
+  "is_closed" : true
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of accidents
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0ConfigGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/config</code></pre></div>
+    <div class="method-summary">Get customer's device configuration (<span class="nickname">apiV0ConfigGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Config">Config</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "active_alert" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Customer&#x27;s device configuration
+        <a href="#Config">Config</a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0ConfigPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/v0/config</code></pre></div>
+    <div class="method-summary">Set customer's device configuration (<span class="nickname">apiV0ConfigPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Config">Config</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Config">Config</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "active_alert" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Updated customer&#x27;s device configuration
+        <a href="#Config">Config</a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0DeviceGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/device</code></pre></div>
+    <div class="method-summary">Get customer device list (<span class="nickname">apiV0DeviceGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">license_plate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">date (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific date </div>      <div class="param">license_plate_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">sub_fleet (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to sub fleet </div>      <div class="param">date_from (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices seen after a date (inclusive) </div>      <div class="param">date_to (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices seen before a date (inclusive) </div>      <div class="param">status (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices with specific status </div>      <div class="param">version (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices with specific version </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Device">Device</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "driver_name" : "driver_name",
+  "license_plate" : "license_plate",
+  "device_id" : "device_id",
+  "customer_sub_fleet" : "customer_sub_fleet",
+  "customer" : "customer"
+}, {
+  "driver_name" : "driver_name",
+  "license_plate" : "license_plate",
+  "device_id" : "device_id",
+  "customer_sub_fleet" : "customer_sub_fleet",
+  "customer" : "customer"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of customer registered devices (only activated devices are available)
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0EventEventIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/event/{eventId}</code></pre></div>
+    <div class="method-summary">List customer's recent event (<span class="nickname">apiV0EventEventIdGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">eventId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of event format: int64</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Event">Event</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ "", "" ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Customer&#x27;s device configuration
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0EventGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/event</code></pre></div>
+    <div class="method-summary">List customer's recent event (<span class="nickname">apiV0EventGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">limit (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit number of returned objects </div>      <div class="param">level (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to required level and above </div>      <div class="param">license_plate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">date (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific date </div>      <div class="param">license_plate_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">sub_fleet (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to sub fleet </div>      <div class="param">severity (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to a severity above certain level </div>      <div class="param">date_from (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to events after a date (inclusive) </div>      <div class="param">date_to (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to events before a date (inclusive) </div>      <div class="param">event_type (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific events by type </div>      <div class="param">trip_id (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific events by ID a trip </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#EventShort">EventShort</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "event_id" : 0,
+  "level" : "level",
+  "type" : "type",
+  "device" : {
+    "wellness_details" : 1,
+    "last_seen" : 0,
+    "wellness" : 6,
+    "hourly_wellness" : [ {
+      "datetime" : "datetime",
+      "wellness_details" : 5,
+      "wellness" : 5
+    }, {
+      "datetime" : "datetime",
+      "wellness_details" : 5,
+      "wellness" : 5
+    } ],
+    "location" : "location",
+    "device" : {
+      "driver_name" : "driver_name",
+      "license_plate" : "license_plate",
+      "device_id" : "device_id",
+      "customer_sub_fleet" : "customer_sub_fleet",
+      "customer" : "customer"
+    },
+    "version" : "version",
+    "status" : "status"
+  },
+  "timestamp" : 6
+}, {
+  "event_id" : 0,
+  "level" : "level",
+  "type" : "type",
+  "device" : {
+    "wellness_details" : 1,
+    "last_seen" : 0,
+    "wellness" : 6,
+    "hourly_wellness" : [ {
+      "datetime" : "datetime",
+      "wellness_details" : 5,
+      "wellness" : 5
+    }, {
+      "datetime" : "datetime",
+      "wellness_details" : 5,
+      "wellness" : 5
+    } ],
+    "location" : "location",
+    "device" : {
+      "driver_name" : "driver_name",
+      "license_plate" : "license_plate",
+      "device_id" : "device_id",
+      "customer_sub_fleet" : "customer_sub_fleet",
+      "customer" : "customer"
+    },
+    "version" : "version",
+    "status" : "status"
+  },
+  "timestamp" : 6
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Customer&#x27;s device configuration
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0MetricGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/metric</code></pre></div>
+    <div class="method-summary">Get metrics data (<span class="nickname">apiV0MetricGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">sub_fleet (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to sub fleet </div>      <div class="param">date_from (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics after a date (inclusive) </div>      <div class="param">date_to (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics before a date (inclusive) </div>      <div class="param">metric_name (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics of specific type </div>      <div class="param">scope (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics to specific scope (default: weekly) </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#MetricData">MetricData</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "date" : "date",
+  "metric_name" : "metric_name",
+  "severity_per_hour" : 5.637377,
+  "scope" : "scope",
+  "driving_duration_hour" : 6,
+  "incident_per_kkm" : 5.962134,
+  "severity_per_kkm" : 2.302136,
+  "driving_distance" : 0,
+  "device" : {
+    "driver_name" : "driver_name",
+    "license_plate" : "license_plate",
+    "device_id" : "device_id",
+    "customer_sub_fleet" : "customer_sub_fleet",
+    "customer" : "customer"
+  },
+  "incident_per_hour" : 1.4658129,
+  "ordinal" : 7
+}, {
+  "date" : "date",
+  "metric_name" : "metric_name",
+  "severity_per_hour" : 5.637377,
+  "scope" : "scope",
+  "driving_duration_hour" : 6,
+  "incident_per_kkm" : 5.962134,
+  "severity_per_kkm" : 2.302136,
+  "driving_distance" : 0,
+  "device" : {
+    "driver_name" : "driver_name",
+    "license_plate" : "license_plate",
+    "device_id" : "device_id",
+    "customer_sub_fleet" : "customer_sub_fleet",
+    "customer" : "customer"
+  },
+  "incident_per_hour" : 1.4658129,
+  "ordinal" : 7
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of trips
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0TripGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/trip</code></pre></div>
+    <div class="method-summary">Get trips data (<span class="nickname">apiV0TripGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">page (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Next event list </div>      <div class="param">limit (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit number of returned objects </div>      <div class="param">level (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to required level and above </div>      <div class="param">license_plate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">date (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific date </div>      <div class="param">license_plate_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">sub_fleet (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to sub fleet </div>      <div class="param">date_from (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to events after a date (inclusive) </div>      <div class="param">date_to (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to events before a date (inclusive) </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#TripData">TripData</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "duration" : 6,
+  "start_time" : 0,
+  "trip_id" : "trip_id",
+  "route" : "route",
+  "device" : {
+    "driver_name" : "driver_name",
+    "license_plate" : "license_plate",
+    "device_id" : "device_id",
+    "customer_sub_fleet" : "customer_sub_fleet",
+    "customer" : "customer"
+  }
+}, {
+  "duration" : 6,
+  "start_time" : 0,
+  "trip_id" : "trip_id",
+  "route" : "route",
+  "device" : {
+    "driver_name" : "driver_name",
+    "license_plate" : "license_plate",
+    "device_id" : "device_id",
+    "customer_sub_fleet" : "customer_sub_fleet",
+    "customer" : "customer"
+  }
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of trips
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0UpdateDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/v0/update</code></pre></div>
+    <div class="method-summary">Remove files from device updates (<span class="nickname">apiV0UpdateDelete</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    operation succeed
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0UpdatePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/v0/update</code></pre></div>
+    <div class="method-summary">Initial request to upload file (<span class="nickname">apiV0UpdatePost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#FileUpload">FileUpload</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#FileUploadResponse">FileUploadResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "s3_path" : "s3_path",
+  "upload_url" : "upload_url"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Upload file path and url (for the actual upload request)
+        <a href="#FileUploadResponse">FileUploadResponse</a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0UpdatePut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/v0/update</code></pre></div>
+    <div class="method-summary">Set devices to update the relevant file (<span class="nickname">apiV0UpdatePut</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#FileUploadComplete">FileUploadComplete</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#FileUploadCompleteResponse">FileUploadCompleteResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "created" : 0,
+  "updated" : 6
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Number of effected entities
+        <a href="#FileUploadCompleteResponse">FileUploadCompleteResponse</a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV0UserGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v0/user</code></pre></div>
+    <div class="method-summary">Get user details (<span class="nickname">apiV0UserGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#User">User</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "name" : "name",
+  "admin" : true,
+  "username" : "username",
+  "customer" : "customer"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    User details
+        <a href="#User">User</a>
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV1DeviceGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/device</code></pre></div>
+    <div class="method-summary">Get customer device list (<span class="nickname">apiV1DeviceGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">license_plate (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">date (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific date </div>      <div class="param">license_plate_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to specific vehicle </div>      <div class="param">driver_name_contains (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to driver </div>      <div class="param">sub_fleet (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to sub fleet </div>      <div class="param">date_from (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices seen after a date (inclusive) </div>      <div class="param">date_to (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices seen before a date (inclusive) </div>      <div class="param">status (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices with specific status </div>      <div class="param">version (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to devices with specific version </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#DeviceStatus">DeviceStatus</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "wellness_details" : 1,
+  "last_seen" : 0,
+  "wellness" : 6,
+  "hourly_wellness" : [ {
+    "datetime" : "datetime",
+    "wellness_details" : 5,
+    "wellness" : 5
+  }, {
+    "datetime" : "datetime",
+    "wellness_details" : 5,
+    "wellness" : 5
+  } ],
+  "location" : "location",
+  "device" : {
+    "driver_name" : "driver_name",
+    "license_plate" : "license_plate",
+    "device_id" : "device_id",
+    "customer_sub_fleet" : "customer_sub_fleet",
+    "customer" : "customer"
+  },
+  "version" : "version",
+  "status" : "status"
+}, {
+  "wellness_details" : 1,
+  "last_seen" : 0,
+  "wellness" : 6,
+  "hourly_wellness" : [ {
+    "datetime" : "datetime",
+    "wellness_details" : 5,
+    "wellness" : 5
+  }, {
+    "datetime" : "datetime",
+    "wellness_details" : 5,
+    "wellness" : 5
+  } ],
+  "location" : "location",
+  "device" : {
+    "driver_name" : "driver_name",
+    "license_plate" : "license_plate",
+    "device_id" : "device_id",
+    "customer_sub_fleet" : "customer_sub_fleet",
+    "customer" : "customer"
+  },
+  "version" : "version",
+  "status" : "status"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of customer registered devices (only activated devices are available)
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiV1MetricGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/metric</code></pre></div>
+    <div class="method-summary">Get metrics data (<span class="nickname">apiV1MetricGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">sub_fleet (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to sub fleet </div>      <div class="param">date_from (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics after a date (inclusive) </div>      <div class="param">date_to (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics before a date (inclusive) </div>      <div class="param">metric_name (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics of specific type </div>      <div class="param">scope (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Limit result to metrics to specific scope (default: weekly) </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#MetricDataV1">MetricDataV1</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "data" : [ {
+    "date" : "date",
+    "metric_name" : "metric_name",
+    "severity_per_hour" : 5.637377,
+    "scope" : "scope",
+    "driving_duration_hour" : 6,
+    "incident_per_kkm" : 5.962134,
+    "severity_per_kkm" : 2.302136,
+    "driving_distance" : 0,
+    "device" : {
+      "driver_name" : "driver_name",
+      "license_plate" : "license_plate",
+      "device_id" : "device_id",
+      "customer_sub_fleet" : "customer_sub_fleet",
+      "customer" : "customer"
+    },
+    "incident_per_hour" : 1.4658129,
+    "ordinal" : 7
+  }, {
+    "date" : "date",
+    "metric_name" : "metric_name",
+    "severity_per_hour" : 5.637377,
+    "scope" : "scope",
+    "driving_duration_hour" : 6,
+    "incident_per_kkm" : 5.962134,
+    "severity_per_kkm" : 2.302136,
+    "driving_distance" : 0,
+    "device" : {
+      "driver_name" : "driver_name",
+      "license_plate" : "license_plate",
+      "device_id" : "device_id",
+      "customer_sub_fleet" : "customer_sub_fleet",
+      "customer" : "customer"
+    },
+    "incident_per_hour" : 1.4658129,
+    "ordinal" : 7
+  } ],
+  "params" : {
+    "eor" : {
+      "limit" : 0.8008281904610115,
+      "weight" : 6.027456183070403
+    }
+  }
+}, {
+  "data" : [ {
+    "date" : "date",
+    "metric_name" : "metric_name",
+    "severity_per_hour" : 5.637377,
+    "scope" : "scope",
+    "driving_duration_hour" : 6,
+    "incident_per_kkm" : 5.962134,
+    "severity_per_kkm" : 2.302136,
+    "driving_distance" : 0,
+    "device" : {
+      "driver_name" : "driver_name",
+      "license_plate" : "license_plate",
+      "device_id" : "device_id",
+      "customer_sub_fleet" : "customer_sub_fleet",
+      "customer" : "customer"
+    },
+    "incident_per_hour" : 1.4658129,
+    "ordinal" : 7
+  }, {
+    "date" : "date",
+    "metric_name" : "metric_name",
+    "severity_per_hour" : 5.637377,
+    "scope" : "scope",
+    "driving_duration_hour" : 6,
+    "incident_per_kkm" : 5.962134,
+    "severity_per_kkm" : 2.302136,
+    "driving_distance" : 0,
+    "device" : {
+      "driver_name" : "driver_name",
+      "license_plate" : "license_plate",
+      "device_id" : "device_id",
+      "customer_sub_fleet" : "customer_sub_fleet",
+      "customer" : "customer"
+    },
+    "incident_per_hour" : 1.4658129,
+    "ordinal" : 7
+  } ],
+  "params" : {
+    "eor" : {
+      "limit" : 0.8008281904610115,
+      "weight" : 6.027456183070403
+    }
+  }
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of trips
+        
+    <h4 class="field-label">401</h4>
+    Unauthenticated access
+        <a href="#"></a>
+    <h4 class="field-label">403</h4>
+    Unauthorized access
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Gateway">Gateway</a></h1>
+  <div class="method"><a name="deviceIdCommandPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{deviceId}/command</code></pre></div>
+    <div class="method-summary">Report command status (<span class="nickname">deviceIdCommandPost</span>)</div>
+    <div class="method-notes">Report command status and relevant output</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#RemoteCommandResult">RemoteCommandResult</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid input
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdConfigGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /{deviceId}/config</code></pre></div>
+    <div class="method-summary">Updates a pet in the store with form data (<span class="nickname">deviceIdConfigGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device to get updated configuration for </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Config">Config</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "active_alert" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#Config">Config</a>
+    <h4 class="field-label">400</h4>
+    Invalid input
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdEventEventIdPatch"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="patch"><code class="huge"><span class="http-method">patch</span> /{deviceId}/event/{eventId}</code></pre></div>
+    <div class="method-summary">Updates event's details (<span class="nickname">deviceIdEventEventIdPatch</span>)</div>
+    <div class="method-notes">Update existing event data</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>      <div class="param">eventId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of event </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#EventReport">EventReport</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdEventEventIdPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{deviceId}/event/{eventId}</code></pre></div>
+    <div class="method-summary">Updates event (<span class="nickname">deviceIdEventEventIdPost</span>)</div>
+    <div class="method-notes">Report on event occurrence</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>      <div class="param">eventId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of event </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#FileName">FileName</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#EventFileReportResponse">EventFileReportResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "s3_path" : "s3_path",
+  "upload_url" : "upload_url"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#EventFileReportResponse">EventFileReportResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdEventEventIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /{deviceId}/event/{eventId}</code></pre></div>
+    <div class="method-summary">Updates event (<span class="nickname">deviceIdEventEventIdPut</span>)</div>
+    <div class="method-notes">Report on event occurrence</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>      <div class="param">eventId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of event </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#S3Path">S3Path</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdEventPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{deviceId}/event</code></pre></div>
+    <div class="method-summary">Updates event (<span class="nickname">deviceIdEventPost</span>)</div>
+    <div class="method-notes">Report on event occurrence</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#EventReport">EventReport</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#EventReportResponse">EventReportResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "event_id" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#EventReportResponse">EventReportResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdUpdateGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /{deviceId}/update</code></pre></div>
+    <div class="method-summary">Get new software and configuration (<span class="nickname">deviceIdUpdateGet</span>)</div>
+    <div class="method-notes">Get list of updated software and configuration files</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#PackageUpdate">PackageUpdate</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "ref" : 6,
+  "package" : "package",
+  "name" : "name",
+  "package_id" : 0,
+  "version" : "version",
+  "url" : "url",
+  "md5" : "md5"
+}, {
+  "ref" : 6,
+  "package" : "package",
+  "name" : "name",
+  "package_id" : 0,
+  "version" : "version",
+  "url" : "url",
+  "md5" : "md5"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">400</h4>
+    Invalid input
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdUpdatePackageIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /{deviceId}/update/{packageId}</code></pre></div>
+    <div class="method-summary">Get new software and configuration (<span class="nickname">deviceIdUpdatePackageIdGet</span>)</div>
+    <div class="method-notes">Get list of updated software and configuration files</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>      <div class="param">packageId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of package need file from </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">next (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Should get next file </div>      <div class="param">ref (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Reference to current file, use to avoid extra </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#PackageUpdate">PackageUpdate</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "ref" : 6,
+  "package" : "package",
+  "name" : "name",
+  "package_id" : 0,
+  "version" : "version",
+  "url" : "url",
+  "md5" : "md5"
+}, {
+  "ref" : 6,
+  "package" : "package",
+  "name" : "name",
+  "package_id" : 0,
+  "version" : "version",
+  "url" : "url",
+  "md5" : "md5"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">400</h4>
+    Invalid input
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdV1DeviceStatusPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{deviceId}/v1/device_status</code></pre></div>
+    <div class="method-summary">Updates device stats (<span class="nickname">deviceIdV1DeviceStatusPost</span>)</div>
+    <div class="method-notes">Regular update for device stats</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#DeviceStatusV1">DeviceStatusV1</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#WellnessImagesUploadLinks">WellnessImagesUploadLinks</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "ff_wellness_image_upload_url" : "ff_wellness_image_upload_url",
+  "ic_wellness_image_upload_url" : "ic_wellness_image_upload_url"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#WellnessImagesUploadLinks">WellnessImagesUploadLinks</a>
+    <h4 class="field-label">400</h4>
+    Invalid input
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deviceIdV1HeartbeatPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{deviceId}/v1/heartbeat</code></pre></div>
+    <div class="method-summary">Updates device location samples (<span class="nickname">deviceIdV1HeartbeatPost</span>)</div>
+    <div class="method-notes">Regular update for device location telemetries</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">deviceId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of device that needs to be updated </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#HeartBeat">HeartBeat</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RemoteCommand">RemoteCommand</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "data" : "data",
+  "id" : 0,
+  "command" : "command"
+}, {
+  "data" : "data",
+  "id" : 0,
+  "command" : "command"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">400</h4>
+    Invalid input
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#AccidentData"><code>AccidentData</code></a></li>
+    <li><a href="#AccidentDataShort"><code>AccidentDataShort</code></a></li>
+    <li><a href="#Config"><code>Config</code></a></li>
+    <li><a href="#Credentials"><code>Credentials</code></a></li>
+    <li><a href="#Device"><code>Device</code></a></li>
+    <li><a href="#DeviceStatus"><code>DeviceStatus</code></a></li>
+    <li><a href="#DeviceStatusV1"><code>DeviceStatusV1</code></a></li>
+    <li><a href="#Event"><code>Event</code></a></li>
+    <li><a href="#EventFileReportResponse"><code>EventFileReportResponse</code></a></li>
+    <li><a href="#EventReport"><code>EventReport</code></a></li>
+    <li><a href="#EventReportResponse"><code>EventReportResponse</code></a></li>
+    <li><a href="#EventShort"><code>EventShort</code></a></li>
+    <li><a href="#FileName"><code>FileName</code> - FileName</a></li>
+    <li><a href="#FileUpdate"><code>FileUpdate</code></a></li>
+    <li><a href="#FileUpload"><code>FileUpload</code></a></li>
+    <li><a href="#FileUploadComplete"><code>FileUploadComplete</code></a></li>
+    <li><a href="#FileUploadCompleteResponse"><code>FileUploadCompleteResponse</code></a></li>
+    <li><a href="#FileUploadResponse"><code>FileUploadResponse</code></a></li>
+    <li><a href="#FrontFacingWellness"><code>FrontFacingWellness</code></a></li>
+    <li><a href="#HeartBeat"><code>HeartBeat</code></a></li>
+    <li><a href="#InCabinWellness"><code>InCabinWellness</code></a></li>
+    <li><a href="#LocationSample"><code>LocationSample</code></a></li>
+    <li><a href="#MetricData"><code>MetricData</code></a></li>
+    <li><a href="#MetricDataV1"><code>MetricDataV1</code></a></li>
+    <li><a href="#MetricDataV1_params"><code>MetricDataV1_params</code></a></li>
+    <li><a href="#MetricParams"><code>MetricParams</code></a></li>
+    <li><a href="#PackageUpdate"><code>PackageUpdate</code></a></li>
+    <li><a href="#RemoteCommand"><code>RemoteCommand</code></a></li>
+    <li><a href="#RemoteCommandResult"><code>RemoteCommandResult</code></a></li>
+    <li><a href="#S3Path"><code>S3Path</code> - S3Path</a></li>
+    <li><a href="#TripData"><code>TripData</code></a></li>
+    <li><a href="#User"><code>User</code></a></li>
+    <li><a href="#VersionUpdate"><code>VersionUpdate</code></a></li>
+    <li><a href="#Wellness"><code>Wellness</code></a></li>
+    <li><a href="#WellnessImagesUploadLinks"><code>WellnessImagesUploadLinks</code></a></li>
+    <li><a href="#WellnessStatus"><code>WellnessStatus</code></a></li>
+    <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="AccidentData"><code>AccidentData</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">accident_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">customer (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">event_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">license_plate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">driver_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">datetime (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">location (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">policy_number (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">claim_number (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">appraiser (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">garage (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">paid_amount (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">paid_currency (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">third_party_damage (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">own_damage (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">is_closed (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AccidentDataShort"><code>AccidentDataShort</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">accident_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">license_plate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">driver_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">datetime (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">claim_number (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">own_damage (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">is_closed (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Config"><code>Config</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">active_alert (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Credentials"><code>Credentials</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User&#x27;s username </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User&#x27;s password </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Device"><code>Device</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">device_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Device ID </div>
+<div class="param">license_plate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Vehicle license plate </div>
+<div class="param">driver_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Vehicle license plate </div>
+<div class="param">customer (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Customer name </div>
+<div class="param">customer_sub_fleet (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Sub fleet name (if exists) </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="DeviceStatus"><code>DeviceStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">device (optional)</div><div class="param-desc"><span class="param-type"><a href="#Device">Device</a></span>  </div>
+<div class="param">last_seen (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Timestamp of last report </div>
+<div class="param">location (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Updated location of device </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Updated status of the device </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Installed software version </div>
+<div class="param">wellness (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> wellness level </div>
+<div class="param">wellness_details (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> wellness issue details </div>
+<div class="param">hourly_wellness (optional)</div><div class="param-desc"><span class="param-type"><a href="#WellnessStatus">array[WellnessStatus]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="DeviceStatusV1"><code>DeviceStatusV1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">sim_number (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> sim number of device </div>
+<div class="param">version_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> name of version running on device </div>
+<div class="param">in_cabin_wellness (optional)</div><div class="param-desc"><span class="param-type"><a href="#InCabinWellness">InCabinWellness</a></span>  </div>
+<div class="param">front_facing_wellness (optional)</div><div class="param-desc"><span class="param-type"><a href="#FrontFacingWellness">FrontFacingWellness</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Event"><code>Event</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">event_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Event ID </div>
+<div class="param">device (optional)</div><div class="param-desc"><span class="param-type"><a href="#DeviceStatus">DeviceStatus</a></span>  </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Short event&#x27;s description </div>
+<div class="param">timestamp (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Epoch event&#x27;s timestamp (UTC) </div>
+<div class="param">level (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Event severity level </div>
+<div class="param">tags (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> List of tags describing the event </div>
+<div class="param">artifact_path (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> Literal object. key: file name value: S3 url </div>
+<div class="param">device_statuses (optional)</div><div class="param-desc"><span class="param-type"><a href="#DeviceStatus">array[DeviceStatus]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EventFileReportResponse"><code>EventFileReportResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">s3_path (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Path to s3 artifact, needed for PUT request </div>
+<div class="param">upload_url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> S3 url for upload the file </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EventReport"><code>EventReport</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">event_type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tags (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">level (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">severity (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  format: float</div>
+<div class="param">trip_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">additional_info (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">location (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> gps location </div>
+<div class="param">speed (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span> vehicle speed in m/s format: float</div>
+<div class="param">timestamp (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span> timestamp in seconds from epoch format: int64</div>
+<div class="param">detector_version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> version of detector that caused the event </div>
+<div class="param">event_description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> short description of cause of event </div>
+<div class="param">start_frame_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span> frame_id of beginning of video attached to event format: int64</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EventReportResponse"><code>EventReportResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">event_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EventShort"><code>EventShort</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">event_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Event ID </div>
+<div class="param">device (optional)</div><div class="param-desc"><span class="param-type"><a href="#DeviceStatus">DeviceStatus</a></span>  </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Short event&#x27;s description </div>
+<div class="param">timestamp (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Epoch event&#x27;s timestamp (UTC) </div>
+<div class="param">level (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Event severity level </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FileName"><code>FileName</code> - FileName</a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">file_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FileUpdate"><code>FileUpdate</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> File&#x27;s name </div>
+<div class="param">url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> File download url </div>
+<div class="param">md5 (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> MD5 hash of the file to download </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FileUpload"><code>FileUpload</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">file_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Name of the file to upload </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FileUploadComplete"><code>FileUploadComplete</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">device_ids </div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> List of device ids to update </div>
+<div class="param">file_name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Name of the file to upload </div>
+<div class="param">s3_path (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> S3 Object key (path without bucket) </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Version identifier (Optional) </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FileUploadCompleteResponse"><code>FileUploadCompleteResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Number of new entries </div>
+<div class="param">updated (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Number of updated entries </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FileUploadResponse"><code>FileUploadResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">s3_path (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> S3 path inside the bucket </div>
+<div class="param">upload_url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Pre-signed upload URL </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FrontFacingWellness"><code>FrontFacingWellness</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">state (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> State of front facing wellness </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="HeartBeat"><code>HeartBeat</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">trip_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier for current trip </div>
+<div class="param">location_samples (optional)</div><div class="param-desc"><span class="param-type"><a href="#LocationSample">array[LocationSample]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="InCabinWellness"><code>InCabinWellness</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">blocked (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Is in-cabin camera blocked (&amp;quot;true&amp;quot;, &amp;quot;false&amp;quot;, unknown&amp;quot;) </div>
+<div class="param">no_face (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Is face not detected in in-cabin camera frames (&amp;quot;true&amp;quot;, &amp;quot;false&amp;quot;, &amp;quot;unknown&amp;quot;) </div>
+<div class="param">peripheral_face (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Is face detected in a peripheral location (&amp;quot;true&amp;quot;, &amp;quot;false&amp;quot;, &amp;quot;unknown&amp;quot;) </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="LocationSample"><code>LocationSample</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">timestamp (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  </div>
+<div class="param">latitude (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  </div>
+<div class="param">longitude (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  </div>
+<div class="param">speed (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  </div>
+<div class="param">distance (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MetricData"><code>MetricData</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">device (optional)</div><div class="param-desc"><span class="param-type"><a href="#Device">Device</a></span>  </div>
+<div class="param">date (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> metric date frame </div>
+<div class="param">scope (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> metric scope </div>
+<div class="param">driving_distance (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Total driving distance (kkm) </div>
+<div class="param">driving_duration_hour (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Total driving duration (hours) </div>
+<div class="param">incident_per_hour (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span> Incident per hour format: float</div>
+<div class="param">incident_per_kkm (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span> Incident per kkm format: float</div>
+<div class="param">severity_per_hour (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span> Severity per hour format: float</div>
+<div class="param">severity_per_kkm (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span> Severity per kkm format: float</div>
+<div class="param">metric_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Metric name </div>
+<div class="param">ordinal (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Date proleptic Gregorian ordinal </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MetricDataV1"><code>MetricDataV1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#MetricData">array[MetricData]</a></span>  </div>
+<div class="param">params (optional)</div><div class="param-desc"><span class="param-type"><a href="#MetricDataV1_params">MetricDataV1_params</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MetricDataV1_params"><code>MetricDataV1_params</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">eor (optional)</div><div class="param-desc"><span class="param-type"><a href="#MetricParams">MetricParams</a></span>  </div>
+<div class="param">sleep (optional)</div><div class="param-desc"><span class="param-type"><a href="#MetricParams">MetricParams</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MetricParams"><code>MetricParams</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">limit (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">weight (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PackageUpdate"><code>PackageUpdate</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> File&#x27;s name </div>
+<div class="param">url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> File download url </div>
+<div class="param">md5 (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> MD5 hash of the file to download </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier of the file to download </div>
+<div class="param">package (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Name of package </div>
+<div class="param">package_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> ID of package </div>
+<div class="param">ref (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Identifier of current file, in order to avoid file missing on retries </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RemoteCommand"><code>RemoteCommand</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span> Identifier for remote command format: int64</div>
+<div class="param">command (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Command to execute </div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Data to pass to command </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RemoteCommandResult"><code>RemoteCommandResult</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span> Identifier for remote command format: int64</div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Status of command execution </div>
+<div class="param">result (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Result of command execution </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="S3Path"><code>S3Path</code> - S3Path</a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">s3_path (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="TripData"><code>TripData</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">device (optional)</div><div class="param-desc"><span class="param-type"><a href="#Device">Device</a></span>  </div>
+<div class="param">trip_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Trip generated identifier </div>
+<div class="param">start_time (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Epoch event&#x27;s timestamp (UTC) </div>
+<div class="param">duration (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Trip approximate time in seconds </div>
+<div class="param">route (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> GPS track </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User"><code>User</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User&#x27;s full name </div>
+<div class="param">customer (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> User&#x27;s associated customer </div>
+<div class="param">admin (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Is user is an admin </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="VersionUpdate"><code>VersionUpdate</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> File&#x27;s name </div>
+<div class="param">url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> File download url </div>
+<div class="param">md5 (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> MD5 hash of the file to download </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier of the file to download </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Wellness"><code>Wellness</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">level (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Wellness aggregated level. one of &amp;quot;unknown&amp;quot;|&amp;quot;low&amp;quot;|&amp;quot;medium&amp;quot;|&amp;quot;high&amp;quot; </div>
+<div class="param">peripheral_face (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Is face not in center of frame. one of &amp;quot;unknown&amp;quot;|&amp;quot;true&amp;quot;|&amp;quot;false&amp;quot; </div>
+<div class="param">no_face (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Is face missing. one of &amp;quot;unknown&amp;quot;|&amp;quot;true&amp;quot;|&amp;quot;false&amp;quot; </div>
+<div class="param">camera_blocked (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Is camera blocked. one of &amp;quot;unknown&amp;quot;|&amp;quot;true&amp;quot;|&amp;quot;false&amp;quot; </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="WellnessImagesUploadLinks"><code>WellnessImagesUploadLinks</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">ic_wellness_image_upload_url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Link for in cabin wellness image upload </div>
+<div class="param">ff_wellness_image_upload_url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Link for front facing wellness image upload </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="WellnessStatus"><code>WellnessStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">datetime (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> date of aggregated wellness </div>
+<div class="param">wellness (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> wellness level </div>
+<div class="param">wellness_details (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> wellness issue details </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">token (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> user&#x27;s token </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

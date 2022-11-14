@@ -1,0 +1,16 @@
+
+<%- include("partials/header.ejs") -%>
+
+<h1>Home</h1>
+<p><%=starting_content%></p>
+
+<% posts.forEach(function(post){%>
+  <h2><%=post.title %></h2>
+  <% const truncatedBody = post.body.substring(0,100); %>
+  <p>
+    <%=truncatedBody%>...
+    <a href="/posts/<%=post.title%>""> read mode</a>
+  </p>
+<% }) %>
+
+<%- include("partials/footer.ejs") -%>
